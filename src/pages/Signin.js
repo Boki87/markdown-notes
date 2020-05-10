@@ -7,8 +7,9 @@ import {useAuth} from '../store'
 import loginSvg from  "../assets/images/login.svg"
 import InputGroup from '../components/form/InputGroup'
 
+import {StyledBgGradient} from '../styledComponents'
 
-const Login = ({history}) => {
+const Signin = ({history}) => {
 
     const [loginObj, setLoginObj] = useState({
         email: 'boki@gmail.com',
@@ -36,14 +37,15 @@ const Login = ({history}) => {
 
 
     return (
-        <StyledWrapper>
+        <StyledBgGradient>
 
             <StyledFormWrapper>
-                <StyledIlustrationDiv>
+                {/* <StyledIlustrationDiv>
                         <img src={loginSvg} alt=""/>
-                </StyledIlustrationDiv>
+                </StyledIlustrationDiv> */}
 
                 <StyledForm onSubmit={submitHandler}>
+                    <img className='loginIcon' src={loginSvg} alt=""/>
 
                     <h1>Sign in</h1>
 
@@ -53,7 +55,7 @@ const Login = ({history}) => {
                   
 
                     <StyledBtn style={{margin: '10px auto'}} type="submit">
-                        {!loading ? 'Sign in' : 'Loading...'}
+                        {!loading ? 'Sign in' : 'Signing in...'}
                     </StyledBtn>
 
 
@@ -62,36 +64,22 @@ const Login = ({history}) => {
                     </div>
                 </StyledForm>
             </StyledFormWrapper>
-        </StyledWrapper>
+        </StyledBgGradient>
     )
 }
 
-export default Login
-
-
-
-const StyledWrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    background: #2D3E50;
-    background: -webkit-linear-gradient(top, #2D3E50, #6791BA);
-    background: -moz-linear-gradient(top, #2D3E50, #6791BA);
-    background: linear-gradient(to bottom, #2D3E50, #6791BA);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+export default Signin
 
 
 const StyledFormWrapper = styled.div`
 
-    width: 800px;
-    height: 500px;
+    width: 500px;
+    /* height: 500px; */
     border-radius: 5px;
     background: #fff;
     display: flex;    
     box-shadow: 0px 4px 5px rgba(0,0,0,.5);
-
+    padding: 10px;
 `
 
 const StyledIlustrationDiv = styled.div`
@@ -108,14 +96,21 @@ const StyledIlustrationDiv = styled.div`
 
 const StyledForm = styled.form`
     height:100%;
-    flex:1;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    /* flex:1; */
+    /* display: flex; */
+    /* flex-direction: column;
     align-items: center;
-    justify-content: center;
-
+    justify-content: center; */
+    text-align: center;
     h1 {
         color: var(--main);
+    }
+
+    .loginIcon {
+        width:100px;
+        height: auto;
+        margin-top: -50px;
     }
 `
 
