@@ -18,6 +18,10 @@ export default createGlobalStyle`
       -moz-osx-font-smoothing: grayscale;
     }
 
+    a {
+      color: var(--main-light);
+    }
+
     body {
         font-family: 'Helvetica', 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", '!default';
         margin: 0;

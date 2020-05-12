@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-const InputGroup = ({onChange, type, name, value}) => {
+const InputGroup = ({onChange, type, name, placeholder = '', value}) => {
 
     return (
         <StyledInput>
-            <input type={type} name={name} value={value} onChange={onChange} autoComplete="off"/>
+            <input type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} autoComplete="off"/>
         </StyledInput> 
     )
 }

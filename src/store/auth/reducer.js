@@ -1,6 +1,7 @@
 import {
     LOGIN_SUCCESS,    
-    LOGIN_FAIL,    
+    LOGIN_FAIL,   
+    REGISTER_FAIL, 
     LOGOUT,    
     SET_LOADING,    
     CLEAR_ERRORS    
@@ -20,6 +21,7 @@ export default (state, action) => {
             }
 
         case LOGIN_FAIL:
+        case REGISTER_FAIL:
             
             return {
                 ...state,

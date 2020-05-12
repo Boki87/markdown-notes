@@ -1,11 +1,14 @@
 import React, {createContext, useReducer, useEffect, useContext} from 'react'
 import authReducer from './reducer'
 
+import {useToasts} from '../toasts/provider'
+
 import {useFirebase} from '../../utils/firebase'
 
 import {
     LOGIN_SUCCESS,    
     LOGIN_FAIL,    
+    REGISTER_FAIL,
     LOGOUT,    
     SET_LOADING,    
     CLEAR_ERRORS    
@@ -26,6 +29,9 @@ const AuthProvider = ({children}) => {
     const {firebaseApp} = useFirebase()
 
     const [state, dispatch] = useReducer(authReducer, initialState)
+
+
+    const {setToast} = useToasts()
 
     useEffect(() => {
         firebaseApp.auth().onAuthStateChanged(function(user) {
@@ -50,11 +56,24 @@ const AuthProvider = ({children}) => {
             console.log(res)
         })
         .catch((err) => {
-            console.log(err)
+            
+            setToast('Wrong email or password')
+
             dispatch({
                 type: LOGIN_FAIL,
                 payload: 'Wrong email or password'
             })
+          })
+    }
+
+    const userSignup = (email, password) => {
+        firebaseApp.auth().createUserWithEmailAndPassword(email,password)
+        .then(res => {
+            
+        })
+        .catch((err) => {
+            console.log(err)
+            setToast(err.message)
           })
     }
 
@@ -78,6 +97,7 @@ const AuthProvider = ({children}) => {
             loading: state.loading,
             userLogin,
             userLogout,
+            userSignup,
             setLoading
         }}>
             {children}
