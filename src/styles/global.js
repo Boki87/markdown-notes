@@ -33,6 +33,9 @@ export default createGlobalStyle`
         --main-light: #425D79;
         --main-lighter: #54779A;
 
+        --bg: ${({theme}) => theme.bg};
+        --text-color: ${({theme}) => theme.text};
+
         background: ${({theme}) => theme.bodyBg};
 
 

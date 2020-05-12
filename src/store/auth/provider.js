@@ -53,11 +53,11 @@ const AuthProvider = ({children}) => {
     const userLogin = (email, password) => {
         firebaseApp.auth().signInWithEmailAndPassword(email,password)
         .then(res => {
-            console.log(res)
+            setToast('Successful signin', 'confirm')            
         })
         .catch((err) => {
             
-            setToast('Wrong email or password')
+            setToast('Wrong email or password', 'alert')
 
             dispatch({
                 type: LOGIN_FAIL,
