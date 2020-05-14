@@ -1,23 +1,37 @@
 import React from 'react'
-import {useAuth} from '../store'
-import {useTheme} from '../store'
+import styled from 'styled-components'
+
+import Sidebar from '../components/sidebar/Sidebar'
+import NotesBar from '../components/notesBar/NotesBar'
+
 
 const Home = () => {
 
-    const {userLogout} = useAuth()
-    const {setTheme} = useTheme()
-
-    const setThemeHandler = () => {
-        setTheme('dark')
-    }
+    
     return (
-        <div>
-            Home
+        <StyledWrapper>
+            <Sidebar />
 
-            <button onClick={userLogout}>Logout</button>
-            <button onClick={setThemeHandler}>Dark Theme</button>
-        </div>
+            <NotesBar />
+
+            <div>
+                editor
+            </div>        
+        </StyledWrapper>
     )
 }
 
 export default Home
+
+
+const StyledWrapper = styled.div`
+
+    display: flex;
+    width:100%;
+    height:100%;    
+
+
+`
+
+
+

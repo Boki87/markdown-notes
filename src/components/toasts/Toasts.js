@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Animated} from 'react-animated-css'
 
 import {useToasts} from '../../store'
 
@@ -25,9 +26,14 @@ const Toasts = () => {
 
 
 
-    const Toast = ({title, index, type, id}) => (<StyledToast index={index}>
-                        <span style={{marginRight:'20px'}}>{title}</span> {typeIcon(type)}
-                    </StyledToast>)
+    const Toast = ({title, index, type, id}) => (
+    
+        <Animated animationIn='slideInRight' animationOut='slideOutRight' animationInDuration={200} isVisible={true}>
+            <StyledToast index={index}>
+                                <span style={{marginRight:'20px'}}>{title}</span> {typeIcon(type)}
+            </StyledToast>
+        </Animated>
+    )
 
 
     return (
