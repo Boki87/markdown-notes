@@ -21,7 +21,10 @@ export const useAuth = () => useContext(AuthContext)
 const AuthProvider = ({children}) => {
 
     const initialState = {
-        user: null,
+        user: {
+            email:'',
+            uid:''
+        },
         error: null,
         loading: true
     }
@@ -38,7 +41,7 @@ const AuthProvider = ({children}) => {
             if(user) {
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: user
+                    payload: {email:user.email,uid:user.uid}
                 })
             }else{
               dispatch({

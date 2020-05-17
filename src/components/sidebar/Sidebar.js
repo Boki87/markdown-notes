@@ -2,50 +2,39 @@ import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {useAuth, useTheme, useDB} from '../../store'
 
+import CategoryBtn from './CategoryBtn'
 
 const Sidebar = () => {
-    const {userLogout} = useAuth()
+    const {userLogout, user} = useAuth()
     const {setTheme} = useTheme()
-    const {activeCategory} = useDB()
+    const {activeCategory,getNotes, categories, setActiveCategory, loading} = useDB()
     // const setThemeHandler = () => {
     //     setTheme('dark')
     // }
 
     useEffect(() => {
         //get all notes
-    },[])
+        getNotes()            
+        
+    },[user])
+
+
 
     return (
         <StyledSidebar>
-                <p>{activeCategory}</p>
-                <div className='categoiesContainer'>
-
-                    <CategoryBtn>
-                        Personal Notes
-                    </CategoryBtn>
+                
+                <div className='categoiesContainer'>   
+                 
+                                {!loading ? categories.map((category, i) => <CategoryBtn title={category} activeCategory={activeCategory} id={i} key={i} setActiveCategory={setActiveCategory}/>) : <span style={{color:'#fff'}}>Loading...</span>}                      
 
                 </div>
 
-                <button className='signoutBtn' onClick={userLogout}><i class="fas fa-sign-out-alt"></i></button>                
+                <button className='signoutBtn' onClick={userLogout}><i className="fas fa-sign-out-alt"></i></button>                
             </StyledSidebar>
     )
 }
 
 export default Sidebar
-
-const CategoryBtn = styled.div`
-
-    width: 100%;
-    height: 30px;
-    font-size: 1.2rem;
-    margin-left:10px;
-    border-left: 3px solid #fff;
-    display:flex;
-    align-items:center;
-    padding-left:20px;    
-    font-weight: bold;
-    cursor: pointer;
-`
 
 
 const StyledSidebar = styled.div`

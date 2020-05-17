@@ -3,7 +3,9 @@ import {
     SET_ACTIVE_NOTE,
     SET_NOTES,
     SET_NOTE,
-    ADD_NOTE
+    ADD_NOTE,
+    NOTES_LOADING,
+    SET_CATEGORIES
 } from '../types'
 
 export default (state, action) => {
@@ -21,7 +23,8 @@ export default (state, action) => {
         case SET_NOTES:
             return {
                 ...state,
-                notes: action.payload
+                notes: action.payload,
+                loading: false
             }
         case SET_NOTE:
             return {
@@ -34,7 +37,18 @@ export default (state, action) => {
         case ADD_NOTE:
             return {
                 ...state,
-                notes: [...state.notes, action.payload]
+                notes: [...state.notes, action.payload],
+                loading: false
+            }
+        case SET_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
+            }
+        case NOTES_LOADING:
+            return {
+                ...state,
+                loading: action.payload
             }
         default:
             return state

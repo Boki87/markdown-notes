@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import dbReducer from './reducer'
+import {useFirebase} from '../../utils/firebase'
+import {useAuth} from '../index'
 
 import {
     SET_ACTIVE_CATEGORY,
@@ -7,6 +9,8 @@ import {
     SET_NOTES,
     SET_NOTE,
     ADD_NOTE,
+    NOTES_LOADING,
+    SET_CATEGORIES
 } from '../types'
 
 
@@ -18,20 +22,54 @@ const DBProvider = ({children}) => {
 
     const initialState = {
         activeCategory:0,
-        activeNote:0,
+        categories:[],
+        activeNote:null,
+        loading: false,
         notes:[]
     }
+    
+    const {user} = useAuth()
+    
+    const {firebaseApp} = useFirebase()
+
+    var db = firebaseApp.firestore()
 
     const [state, dispatch] = useReducer(dbReducer, initialState)
 
+    const getNotes = () => {
+        dispatch({type:NOTES_LOADING, payload:true})
+        db.collection("notes").where("userId", '==', user.uid)
+        .get()
+        .then((querySnapshot) => {
+            let notes = []
+            let categories = []
+            querySnapshot.forEach(doc => {                
+                notes.push({...doc.data(), id:doc.id}) 
+                if(!categories.includes(doc.data().category)) {
+                    categories.push(doc.data().category)
+                }               
+            })
+            dispatch({type:SET_NOTES, payload: notes})
+            dispatch({type:SET_CATEGORIES, payload: categories})
+            
 
+        })
+    }
+
+    const setActiveCategory = (id) => {        
+        dispatch({type:SET_ACTIVE_CATEGORY, payload: id})
+    }
 
 
     return (
         <DBContext.Provider value={{
             activeCategory: state.activeCategory,
+            categories: state.categories,
             activeNote: state.activeNote,
             notes: state.notes,
+            loading: state.loading,
+            setActiveCategory,
+            getNotes
         }}>
             {children}
         </DBContext.Provider>
