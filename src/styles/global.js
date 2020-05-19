@@ -36,6 +36,8 @@ export default createGlobalStyle`
         --bg: ${({theme}) => theme.bg};
         --text-color: ${({theme}) => theme.text};
 
+        --body-bg: ${({theme}) => theme.bodyBg};
+
         background: ${({theme}) => theme.bodyBg};
 
 

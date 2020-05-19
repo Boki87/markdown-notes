@@ -13,7 +13,12 @@ export default (state, action) => {
         case SET_ACTIVE_CATEGORY:
             return {
                 ...state,
-                activeCategory: action.payload
+                activeCategory: action.payload,
+                activeNote: {
+                    id: -1,
+                    noteBody: '',
+                    category: ''
+                }
             }
         case SET_ACTIVE_NOTE:
             return {

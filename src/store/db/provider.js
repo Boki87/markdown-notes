@@ -23,7 +23,11 @@ const DBProvider = ({children}) => {
     const initialState = {
         activeCategory:0,
         categories:[],
-        activeNote:null,
+        activeNote:{
+            id: -1,
+            noteBody: '',
+            category: ''
+        },
         loading: false,
         notes:[]
     }
@@ -59,6 +63,10 @@ const DBProvider = ({children}) => {
     const setActiveCategory = (id) => {        
         dispatch({type:SET_ACTIVE_CATEGORY, payload: id})
     }
+    
+    const setActiveNote = (note) => {        
+        dispatch({type:SET_ACTIVE_NOTE, payload: note})
+    }
 
 
     return (
@@ -69,6 +77,7 @@ const DBProvider = ({children}) => {
             notes: state.notes,
             loading: state.loading,
             setActiveCategory,
+            setActiveNote,
             getNotes
         }}>
             {children}
