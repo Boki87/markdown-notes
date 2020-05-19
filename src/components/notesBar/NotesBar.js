@@ -13,8 +13,9 @@ const NotesBar = () => {
 
     const [filteredNotes, setFilteredNotes] = useState([])
 
+    const [filterQuery, setFilterQuery] = useState('')
 
-    useEffect(() => {        
+    const filterByCat = () => {
         let tempNotes = notes.filter(note => {            
             if(note.category === categories[activeCategory]) {
                 return note
@@ -22,14 +23,33 @@ const NotesBar = () => {
         })
 
         setFilteredNotes(tempNotes)
+    }
+
+    useEffect(() => {        
+        filterByCat()
     }, [activeCategory,notes,categories])
 
 
+    useEffect(() => {
+
+        if(filterQuery != '') {
+            let tempNotes = notes.filter(note => {            
+                if(note.category === categories[activeCategory] && note.noteBody.toLowerCase().includes(filterQuery.toLowerCase())) {
+                    return note
+                }
+            })
+    
+            setFilteredNotes(tempNotes)
+        }else{
+            filterByCat()
+        }
+
+    }, [filterQuery])
    
 
     return (
         <StyledNotesContainer>
-            <SearchBar />
+            <SearchBar setFilterQuery={setFilterQuery}/>
                 
             {filteredNotes.length > 0 && filteredNotes.map(note => <NoteBtn title={note.noteBody} id={note.id} key={note.id}/>)}
 
