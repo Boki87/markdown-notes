@@ -34,7 +34,7 @@ const NotesBar = () => {
 
         if(filterQuery != '') {
             let tempNotes = notes.filter(note => {            
-                if(note.category === categories[activeCategory] && note.noteBody.toLowerCase().includes(filterQuery.toLowerCase())) {
+                if(note.category === categories[activeCategory] && note.noteBody.toLowerCase().includes(filterQuery.toLowerCase().trim())) {
                     return note
                 }
             })

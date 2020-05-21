@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Sidebar from '../components/sidebar/Sidebar'
 import NotesBar from '../components/notesBar/NotesBar'
+import NoteEditor from '../components/noteEditor/NoteEditor'
 
 
 const Home = () => {
@@ -14,9 +15,7 @@ const Home = () => {
 
             <NotesBar />
 
-            <div>
-                editor
-            </div>        
+            <NoteEditor />    
         </StyledWrapper>
     )
 }
