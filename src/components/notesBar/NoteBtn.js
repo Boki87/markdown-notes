@@ -35,8 +35,4 @@ const StyledNoteBtn = styled.div`
         cursor: pointer;
         filter: brightness(90%);
     }
-
-    p {
-        color: ${({activeNote, id}) => activeNote === id ? '#fff' : '#777'}
-    }
 `

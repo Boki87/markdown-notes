@@ -5,7 +5,8 @@ import {
     SET_NOTE,
     ADD_NOTE,
     NOTES_LOADING,
-    SET_CATEGORIES
+    SET_CATEGORIES,
+    DEL_NOTE
 } from '../types'
 
 export default (state, action) => {
@@ -47,6 +48,16 @@ export default (state, action) => {
             return {
                 ...state,
                 notes: [...state.notes, action.payload],
+                loading: false
+            }
+        case DEL_NOTE:
+            return {
+                ...state,
+                notes: state.notes.filter(note => {
+                    if(note.id !== action.payload) {
+                        return note
+                    }
+                }),
                 loading: false
             }
         case SET_CATEGORIES:

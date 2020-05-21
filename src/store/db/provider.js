@@ -10,7 +10,8 @@ import {
     SET_NOTE,
     ADD_NOTE,
     NOTES_LOADING,
-    SET_CATEGORIES
+    SET_CATEGORIES,
+    DEL_NOTE
 } from '../types'
 
 
@@ -96,6 +97,22 @@ const DBProvider = ({children}) => {
         });
     }
 
+    const delNote = (id) => {
+        db.collection('notes').doc(id).delete()
+        .then(() => {
+            setActiveNote({
+                id: -1,
+                noteBody: '',
+                category: ''
+            })
+
+            dispatch({type:DEL_NOTE, payload:id})
+        })
+        .catch(() => {
+            console.log('error deeting')
+        })
+    }
+
     return (
         <DBContext.Provider value={{
             activeCategory: state.activeCategory,
@@ -106,7 +123,8 @@ const DBProvider = ({children}) => {
             setActiveCategory,
             setActiveNote,
             getNotes,
-            updateNote
+            updateNote,
+            delNote
         }}>
             {children}
         </DBContext.Provider>
