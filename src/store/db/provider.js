@@ -69,6 +69,33 @@ const DBProvider = ({children}) => {
     }
 
 
+    const updateNote = (note) => {
+                
+        db.collection('notes').doc(note.id).set({
+            category: note.category,
+            noteBody: note.noteBody,
+            timestamp: +new Date() + '',
+            userId: user.uid
+        })
+        .then(() => {
+            console.log("Document successfully written!");
+            dispatch({
+                type: SET_NOTE,
+                payload: {
+                    id: note.id,
+                    category: note.category,
+                    noteBody: note.noteBody,
+                    timestamp: +new Date() + '',
+                    userId: user.uid
+                }
+            })
+        })
+        .catch((error) => {
+            
+            console.error("Error writing document: ", error);
+        });
+    }
+
     return (
         <DBContext.Provider value={{
             activeCategory: state.activeCategory,
@@ -78,7 +105,8 @@ const DBProvider = ({children}) => {
             loading: state.loading,
             setActiveCategory,
             setActiveNote,
-            getNotes
+            getNotes,
+            updateNote
         }}>
             {children}
         </DBContext.Provider>

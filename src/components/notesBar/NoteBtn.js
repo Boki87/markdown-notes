@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
+import Markdown from 'markdown-to-jsx';
 import {useDB} from '../../store'
 
 const NoteBtn = ({title, id}) => {
@@ -12,7 +13,9 @@ const NoteBtn = ({title, id}) => {
     }
 
     return (
-        <StyledNoteBtn onClick={() => setActiveNoteHandler(id)} id={id} activeNote={activeNote.id} dangerouslySetInnerHTML={{__html: title}}></StyledNoteBtn>
+        <StyledNoteBtn onClick={() => setActiveNoteHandler(id)} id={id} activeNote={activeNote.id}>
+            <Markdown children={title}/>
+        </StyledNoteBtn>
     )
 }
 

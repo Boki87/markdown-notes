@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
-import ReactMarkdown from "react-markdown";
+import Markdown from 'markdown-to-jsx';
+
+
 
 
 import {useDB} from '../../store'
@@ -8,30 +10,33 @@ import {useDB} from '../../store'
 import EditorHeader from './EditorHeader'
 
 const NoteEditor = () => {
-    const {activeCategory,categories, activeNote, setActiveNote, loading, notes} = useDB()
+    const {activeCategory,categories, activeNote, setActiveNote, loading, updateNote} = useDB()
 
     const [showPreview, setShowPreview] = useState(false)
 
-    const markdown = `
-# Header 1\n\n
-## Header 2\n\n
+    const [markdown, setMarkdown] = useState('')
 
-_ italic _\n\n
+    useEffect(() => {
+        if(activeNote) {
+            setMarkdown(activeNote.noteBody)
+        }
+    }, [activeNote])
 
-** bold **\n\n
 
-<b> bold Html </b>\n\n
+    const onChange = (e) => {
+        setMarkdown(e.target.value)
+        updateNote({...activeNote, noteBody: e.target.value})
+    }
 
-`;
+
     return (
         <StyledEditorWrapper>
             <EditorHeader showPreview={showPreview} setShowPreview={setShowPreview}/>
 
             {showPreview ? 
-                <ReactMarkdown source={markdown} escapeHtml={false}/> :
-                <textarea></textarea>
-            }                                           
-            
+                <Markdown children={markdown}/> :
+                <textarea value={markdown} onChange={onChange}></textarea>
+            }                                                       
         </StyledEditorWrapper>
     )
 }

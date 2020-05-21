@@ -34,8 +34,12 @@ export default (state, action) => {
         case SET_NOTE:
             return {
                 ...state,
-                notes: state.notes.map(note => {if(note.id === action.payload.id){
+                loading: false,
+                notes: state.notes.map(note => {
+                    if(note.id === action.payload.id){                        
                         return action.payload
+                    }else{
+                        return note
                     }
                 })
             }
