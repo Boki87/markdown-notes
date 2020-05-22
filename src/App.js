@@ -10,6 +10,7 @@ import Signup from './pages/Signup'
 import Home from './pages/Home'
 
 import Toasts from './components/toasts/Toasts'
+import ConfirmModal from './components/modal/ConfirmModal'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <StoreProvider>
       <Toasts />
+      <ConfirmModal />
       <Router>
         <Switch>
           <PrivateRoute exact path='/' component={Home}/>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import Markdown from 'markdown-to-jsx';
 
@@ -22,7 +22,7 @@ const NoteEditor = () => {
         }
     }, [activeNote])
 
-
+    
     const onChange = (e) => {
         setMarkdown(e.target.value)
         updateNote({...activeNote, noteBody: e.target.value})
