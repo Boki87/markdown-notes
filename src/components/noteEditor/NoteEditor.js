@@ -5,12 +5,14 @@ import Markdown from 'markdown-to-jsx';
 
 
 
-import {useDB} from '../../store'
+import {useDB, useModal} from '../../store'
 
 import EditorHeader from './EditorHeader'
 
 const NoteEditor = () => {
     const {activeCategory,categories, activeNote, setActiveNote, loading, updateNote, delNote} = useDB()
+
+    const {openConfirmModal, hideConfirmModal} = useModal()
 
     const [showPreview, setShowPreview] = useState(false)
 
@@ -29,10 +31,11 @@ const NoteEditor = () => {
     }
 
     const delHandler = () => {
-        let r = window.confirm('Sure you want to delete this note?')
-        if(r) {
+        console.log(11111)
+        openConfirmModal('Sure you want to delete this note?', () => {
             delNote(activeNote.id)
-        }
+            hideConfirmModal()
+        })
     }
 
 

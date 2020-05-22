@@ -1,14 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Animated} from 'react-animated-css'
 
 
-const Modal = ({children}) => {
+const Modal = ({children, bacdropClick}) => {
+
+    const blocker = e => {
+        e.stopPropagation()
+    }
+
     return (
-        <StyledBackdrop>
-            <div className='modal-container'>
-                {children}
-            </div>
-        </StyledBackdrop>
+        
+            <StyledBackdrop onClick={bacdropClick}>
+                <Animated animationIn='slideInDown' animationOut='slideOutUp' animationInDuration={200} isVisible={true}>
+                    <div className='modal-container' onClick={blocker}>
+                        {children}
+                    </div>
+                </Animated>
+            </StyledBackdrop>
+        
     )
 }
 
@@ -21,16 +31,17 @@ const StyledBackdrop = styled.div`
     top:0px;
     left:0px;
     display: flex;
-    background: rgba(0,0,0,.8);
-    z-index: 10;
-    align-items: center;
+    background: rgba(0,0,0,.6);
+    z-index: 10;    
     justify-content: center;
     .modal-container {
         display: flex;
-        width: 500px;
-        min-height: 500px;
+        width: 400px;
+        min-height: 100px;
         background: #fff;
         border-radius: 5px;
-        box-shadow: 0px 5px 5px rgba(0,0,0,.6);
+        box-shadow: 0px 5px 5px rgba(0,0,0,.8);
+        margin-top: 50px;
+        position: relative;
     }
 `

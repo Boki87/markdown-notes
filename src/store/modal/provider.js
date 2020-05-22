@@ -42,6 +42,7 @@ const ModalProvider = ({children}) => {
         <ModalContext.Provider value={{
             showConfirmModal: state.showConfirmModal,
             confirmCallback: state.confirmCallback,
+            confirmModalMsg: state.confirmModalMsg,
             openConfirmModal,
             hideConfirmModal
         }}>
