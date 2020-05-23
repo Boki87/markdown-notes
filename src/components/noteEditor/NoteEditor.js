@@ -31,7 +31,7 @@ const NoteEditor = () => {
     }
 
     const delHandler = () => {
-        console.log(11111)
+        
         openConfirmModal('Sure you want to delete this note?', () => {
             delNote(activeNote.id)
             hideConfirmModal()

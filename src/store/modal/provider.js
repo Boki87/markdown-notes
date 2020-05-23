@@ -3,7 +3,9 @@ import React, {createContext, useContext, useReducer} from 'react'
 import {
     SHOW_CONFIRM_MODAL,
     SET_CONFIRM_MODAL_MSG,
-    SET_CONFIRM_CALLBACK
+    SET_CONFIRM_CALLBACK,
+
+    SHOW_NEW_NOTE_MODAL
 } from '../types'
 
 
@@ -21,9 +23,19 @@ const ModalProvider = ({children}) => {
         confirmModalMsg: '',
         confirmCallback: null,
 
+        showNewNoteModal: false,
+
+
     }
 
     const [state, dispatch] = useReducer(modalReducer, initialState)
+
+    const openNewNoteNodal = () => {
+        dispatch({type:SHOW_NEW_NOTE_MODAL, payload:true})
+    }
+    const hideNewNoteModal = () => {        
+        dispatch({type:SHOW_NEW_NOTE_MODAL, payload:false})
+    }
 
 
     const openConfirmModal = (msg, cb) => {
@@ -44,7 +56,11 @@ const ModalProvider = ({children}) => {
             confirmCallback: state.confirmCallback,
             confirmModalMsg: state.confirmModalMsg,
             openConfirmModal,
-            hideConfirmModal
+            hideConfirmModal,
+
+            showNewNoteModal: state.showNewNoteModal,
+            openNewNoteNodal,
+            hideNewNoteModal
         }}>
             {children}
         </ModalContext.Provider>

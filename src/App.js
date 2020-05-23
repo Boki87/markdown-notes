@@ -11,6 +11,7 @@ import Home from './pages/Home'
 
 import Toasts from './components/toasts/Toasts'
 import ConfirmModal from './components/modal/ConfirmModal'
+import NewNoteModal from './components/modal/NewNoteModal'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
     <StoreProvider>
       <Toasts />
       <ConfirmModal />
+      <NewNoteModal />
       <Router>
         <Switch>
           <PrivateRoute exact path='/' component={Home}/>

@@ -3,15 +3,16 @@ import styled from 'styled-components'
 import {Animated} from 'react-animated-css'
 
 
-const Modal = ({children, bacdropClick}) => {
+const Modal = ({children, backropClick}) => {
 
     const blocker = e => {
         e.stopPropagation()
     }
 
+
     return (
         
-            <StyledBackdrop onClick={bacdropClick}>
+            <StyledBackdrop onClick={backropClick}>
                 <Animated animationIn='slideInDown' animationOut='slideOutUp' animationInDuration={200} isVisible={true}>
                     <div className='modal-container' onClick={blocker}>
                         {children}
@@ -36,7 +37,7 @@ const StyledBackdrop = styled.div`
     justify-content: center;
     .modal-container {
         display: flex;
-        width: 400px;
+        min-width: 400px;
         min-height: 100px;
         background: #fff;
         border-radius: 5px;

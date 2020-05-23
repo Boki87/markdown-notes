@@ -6,6 +6,7 @@ import {useDB} from '../../store'
 
 import SearchBar from './SearchBar'
 import NoteBtn from './NoteBtn'
+import NewNoteBtn from './NewNoteBtn'
 
 const NotesBar = () => {
 
@@ -51,9 +52,10 @@ const NotesBar = () => {
         <StyledNotesContainer>
             <SearchBar setFilterQuery={setFilterQuery}/>
                 
-            {filteredNotes.length > 0 && filteredNotes.map(note => <NoteBtn title={note.noteBody} id={note.id} key={note.id}/>)}
+                {filteredNotes.length > 0 && filteredNotes.map(note => <NoteBtn title={note.noteBody} id={note.id} key={note.id}/>)}
 
 
+                <NewNoteBtn />
             </StyledNotesContainer>
     )
 }
@@ -67,4 +69,5 @@ const StyledNotesContainer = styled.div`
     background: var(--text-color);
     color: var(--bg);
     border-right: 1px solid var(--bg);
+    position: relative;
 `

@@ -1,7 +1,8 @@
 import {
     SHOW_CONFIRM_MODAL,
     SET_CONFIRM_CALLBACK,
-    SET_CONFIRM_MODAL_MSG
+    SET_CONFIRM_MODAL_MSG,
+    SHOW_NEW_NOTE_MODAL
 } from '../types'
 
 
@@ -22,6 +23,11 @@ export default (state, action) => {
             return {
                 ...state,
                 confirmModalMsg: action.payload
+            }
+        case SHOW_NEW_NOTE_MODAL:
+            return {
+                ...state,
+                showNewNoteModal: action.payload
             }
     
         default:
