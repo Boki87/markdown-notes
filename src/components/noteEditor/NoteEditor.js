@@ -14,7 +14,7 @@ const NoteEditor = () => {
 
     const {openConfirmModal, hideConfirmModal} = useModal()
 
-    const [showPreview, setShowPreview] = useState(false)
+    const [showPreview, setShowPreview] = useState(true)
 
     const [markdown, setMarkdown] = useState('')
 
@@ -44,7 +44,7 @@ const NoteEditor = () => {
             <EditorHeader showPreview={showPreview} setShowPreview={setShowPreview} delNote={delHandler}/>
 
             {showPreview ? 
-                <Markdown style={{flex:1,overflow:'auto',padding:'20px',background:'#fff'}} children={markdown}/> :
+                <Markdown className='markdown-body' style={{flex:1,overflow:'auto',padding:'20px',background:'#fff'}} children={markdown}/> :
                 <StyledTextarea value={markdown} onChange={onChange}></StyledTextarea>
             }                                                       
         </StyledEditorWrapper>

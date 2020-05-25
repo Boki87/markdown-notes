@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import dbReducer from './reducer'
 import {useFirebase} from '../../utils/firebase'
 import {useAuth, useModal} from '../index'
@@ -40,6 +40,13 @@ const DBProvider = ({children}) => {
     var db = firebaseApp.firestore()
 
     const [state, dispatch] = useReducer(dbReducer, initialState)
+
+
+    useEffect(() => {
+        
+        updateCategories()
+    }, [state.notes])
+
 
     const getNotes = () => {
         dispatch({type:NOTES_LOADING, payload:true})
@@ -107,6 +114,7 @@ const DBProvider = ({children}) => {
             })
 
             dispatch({type:DEL_NOTE, payload:id})
+            updateCategories()
         })
         .catch(() => {
             console.log('error deeting')
@@ -126,22 +134,31 @@ const DBProvider = ({children}) => {
         db.collection('notes').add(newNote)
         .then(docRef => {
 
-            let categories = []
-            state.notes.forEach(note => {                                
-                if(!categories.includes(note.category)) {
-                    categories.push(note.category)
-                }               
-            })            
-
-            dispatch({type:SET_CATEGORIES, payload: categories})            
+                 
             dispatch({type:ADD_NOTE, payload: {...newNote, id:docRef.id}})
             dispatch({type:NOTES_LOADING, payload:false})
+            
+            
             cb()
         })
         .catch(err => {
             dispatch({type:NOTES_LOADING, payload:false})
             console.log(err)
         })
+    }
+
+
+
+    function updateCategories() {
+
+        let categories = []
+            state.notes.forEach(note => {                                
+                if(!categories.includes(note.category)) {
+                    categories.push(note.category)
+                }               
+            })            
+        
+        dispatch({type:SET_CATEGORIES, payload: categories})
     }
 
     return (

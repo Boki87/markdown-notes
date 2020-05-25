@@ -44,10 +44,10 @@ export default (state, action) => {
                     }
                 })
             }
-        case ADD_NOTE:
+        case ADD_NOTE:            
             return {
                 ...state,
-                notes: [...state.notes, action.payload],
+                notes: [...state.notes, action.payload],                
                 loading: false
             }
         case DEL_NOTE:
