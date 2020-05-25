@@ -113,6 +113,27 @@ const DBProvider = ({children}) => {
         })
     }
 
+
+    const addNote = (category) => {
+        dispatch({type:NOTES_LOADING, payload:true})
+        var newNote = {            
+            category: category,
+            noteBody: '##Edit Me',
+            timestamp: +new Date() + '',
+            userId: user.uid
+        }
+
+        db.collection('notes').add(newNote)
+        .then(docRef => {
+            dispatch({type:NOTES_LOADING, payload:false})
+            dispatch({type:ADD_NOTE, payload: {...newNote, id:docRef.id}})
+        })
+        .catch(err => {
+            dispatch({type:NOTES_LOADING, payload:false})
+            console.log(err)
+        })
+    }
+
     return (
         <DBContext.Provider value={{
             activeCategory: state.activeCategory,
@@ -124,7 +145,8 @@ const DBProvider = ({children}) => {
             setActiveNote,
             getNotes,
             updateNote,
-            delNote
+            delNote,
+            addNote
         }}>
             {children}
         </DBContext.Provider>
