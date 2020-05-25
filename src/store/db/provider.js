@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import dbReducer from './reducer'
 import {useFirebase} from '../../utils/firebase'
-import {useAuth} from '../index'
+import {useAuth, useModal} from '../index'
 
 import {
     SET_ACTIVE_CATEGORY,
@@ -33,7 +33,7 @@ const DBProvider = ({children}) => {
         notes:[]
     }
     
-    const {user} = useAuth()
+    const {user} = useAuth()    
     
     const {firebaseApp} = useFirebase()
 
@@ -114,7 +114,7 @@ const DBProvider = ({children}) => {
     }
 
 
-    const addNote = (category) => {
+    const addNote = (category, cb) => {
         dispatch({type:NOTES_LOADING, payload:true})
         var newNote = {            
             category: category,
@@ -125,8 +125,18 @@ const DBProvider = ({children}) => {
 
         db.collection('notes').add(newNote)
         .then(docRef => {
-            dispatch({type:NOTES_LOADING, payload:false})
+
+            let categories = []
+            state.notes.forEach(note => {                                
+                if(!categories.includes(note.category)) {
+                    categories.push(note.category)
+                }               
+            })            
+
+            dispatch({type:SET_CATEGORIES, payload: categories})            
             dispatch({type:ADD_NOTE, payload: {...newNote, id:docRef.id}})
+            dispatch({type:NOTES_LOADING, payload:false})
+            cb()
         })
         .catch(err => {
             dispatch({type:NOTES_LOADING, payload:false})

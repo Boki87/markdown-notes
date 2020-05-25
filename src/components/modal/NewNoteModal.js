@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import Modal from './Modal'
 
@@ -12,11 +12,17 @@ const NewNoteModal = () => {
 
     const [category, setCategory] = useState('') 
 
+
+    useEffect(() => {
+        setCategory('')
+    }, [showNewNoteModal])
+
+
     const submitHandler = (e) => {
         e.preventDefault()
 
         if(category !== '') {
-            addNote(category)
+            addNote(category, hideNewNoteModal)
         }
     }
 
@@ -36,7 +42,7 @@ const NewNoteModal = () => {
                             <div className='input-group'>
                                 <span>Add note to category:</span>
                                 <select onChange={changeHandler}>
-                                    <option value="-1" selected>Select Category</option>
+                                    <option value="" selected>Select Category</option>
                                     {categories.map(cat => <option value={cat} key={cat}>{cat}</option>)}
                                     
                                 </select>
@@ -44,7 +50,7 @@ const NewNoteModal = () => {
 
                             <div className='input-group'>
                                 <span>Or add to new category:</span>
-                                <input onChange={changeHandler} type="text" placeholder='Category Name'/>
+                                <input onChange={changeHandler} type="text" placeholder='Category Name' value={category}/>
                             </div>
 
                             <button type='submit'>Add</button>
