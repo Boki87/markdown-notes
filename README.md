@@ -18,4 +18,4 @@ To try locally:
 ### Dashboard
 ![Dashboard](preview/dashboard.png)
 
-
+[DEMO](https://unruffled-newton-aee93c.netlify.app/)
