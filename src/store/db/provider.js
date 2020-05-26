@@ -121,7 +121,7 @@ const DBProvider = ({children}) => {
             setToast('Note deleted', 'confirm')
         })
         .catch(() => {
-            console.log('error deeting')
+            console.log('error deleting')
             setToast('Error deleting note', 'alert')
         })
     }
@@ -131,7 +131,7 @@ const DBProvider = ({children}) => {
         dispatch({type:NOTES_LOADING, payload:true})
         var newNote = {            
             category: category,
-            noteBody: '##Edit Me',
+            noteBody: '##New Note\n\nthis is a paragraph.',
             timestamp: +new Date() + '',
             userId: user.uid
         }
@@ -142,7 +142,7 @@ const DBProvider = ({children}) => {
                  
             dispatch({type:ADD_NOTE, payload: {...newNote, id:docRef.id}})
             dispatch({type:NOTES_LOADING, payload:false})
-            setToast('Successfuly added note', 'confirm')
+            setToast('Successfully added note', 'confirm')
             
             cb()
         })

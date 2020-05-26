@@ -3,14 +3,15 @@ import styled from 'styled-components'
 import {useAuth, useTheme, useDB} from '../../store'
 
 import CategoryBtn from './CategoryBtn'
+import {useModal} from '../../store'
 
 const Sidebar = () => {
+
+    const {openNewNoteNodal} = useModal()
     const {userLogout, user} = useAuth()
     const {setTheme} = useTheme()
     const {activeCategory,getNotes, categories, setActiveCategory, loading} = useDB()
-    // const setThemeHandler = () => {
-    //     setTheme('dark')
-    // }
+
 
     useEffect(() => {
         //get all notes
@@ -24,8 +25,12 @@ const Sidebar = () => {
         <StyledSidebar>
                 
                 <div className='categoiesContainer'>   
-                 
-                                {!loading ? categories.map((category, i) => <CategoryBtn title={category} activeCategory={activeCategory} id={i} key={i} setActiveCategory={setActiveCategory}/>) : <span style={{color:'#fff'}}>Loading...</span>}                      
+
+                                {!loading && categories.length == 0 && 
+                                    <div className='no-notes-info'>No categories yet,<br /> go ahead and <a onClick={openNewNoteNodal}>create one.</a></div>
+                                }
+
+                                {!loading ? categories.map((category, i) => <CategoryBtn title={category} activeCategory={activeCategory} id={i} key={i} setActiveCategory={setActiveCategory}/>) : <div className='loader-container'><i className="fas fa-circle-notch fa-spin"></i></div>}                      
 
                 </div>
 
@@ -73,5 +78,23 @@ const StyledSidebar = styled.div`
         padding-top:30px;
         overflow: auto;
         overflow-x: hidden;
+
+        .loader-container {
+            text-align: center;
+            .fas {
+                font-size: 3rem;            
+                margin: 20px auto;
+            }
+        }
+    }
+
+    .no-notes-info {
+        padding: 20px;
+        font-size: 1.1rem;
+        a {
+            color: var(--main-lighter);
+            font-weight: bold;
+            cursor: pointer;
+        }
     }
 `

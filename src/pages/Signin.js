@@ -12,8 +12,8 @@ import {StyledBgGradient, BtnPrimary} from '../styledComponents'
 const Signin = ({history}) => {
 
     const [loginObj, setLoginObj] = useState({
-        email: 'boki@gmail.com',
-        password: 'bokili'
+        email: '',
+        password: ''
     })
 
     const {userLogin, user, loading, setLoading} = useAuth()
@@ -46,8 +46,9 @@ const Signin = ({history}) => {
                     <h1>Sign in</h1>
 
 
-                    <InputGroup type="email" name="email" value={loginObj.email} onChange={changeHandler}/>                    
-                    <InputGroup type="password" name="password" value={loginObj.password} onChange={changeHandler}/>                    
+                   
+                    <InputGroup type="email" name="email" value={loginObj.email} onChange={changeHandler} placeholder='JohnDoe@gmail.com'/>                    
+                    <InputGroup type="password" name="password" value={loginObj.password} onChange={changeHandler} placeholder='Password'/>                      
                   
 
                     <BtnPrimary style={{margin: '10px auto'}} type="submit">
