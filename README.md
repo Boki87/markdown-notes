@@ -11,11 +11,11 @@ To try locally:
 4. `npm start`
 
 
-###Sign in screen
+### Sign in screen
 ![Sign in screen](preview/signin.png)
 
 
-###Dashboard
+### Dashboard
 ![Dashboard](preview/dashboard.png)
 
 
