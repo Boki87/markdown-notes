@@ -42,7 +42,7 @@ const StyledSidebar = styled.div`
     width:250px;
     background: var(--bg);
     color: var(--text-color);
-
+    
 
     .signoutBtn {
         width: 100px;
@@ -72,5 +72,6 @@ const StyledSidebar = styled.div`
         padding-bottom:50px;
         padding-top:30px;
         overflow: auto;
+        overflow-x: hidden;
     }
 `

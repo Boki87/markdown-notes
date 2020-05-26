@@ -36,13 +36,14 @@ const NewNoteModal = () => {
                 {showNewNoteModal &&        
                     <Modal backropClick={hideNewNoteModal}>
                         <StyledModal onSubmit={submitHandler}>
+                            <i onClick={hideNewNoteModal} className="fas fa-times fa-lg"></i>
                             <div className='title'>
                                 <span>New Note</span>
                             </div>
                             <div className='input-group'>
                                 <span>Add note to category:</span>
-                                <select onChange={changeHandler}>
-                                    <option value="" selected>Select Category</option>
+                                <select defaultValue='' onChange={changeHandler}>
+                                    <option value="">Select Category</option>
                                     {categories.map(cat => <option value={cat} key={cat}>{cat}</option>)}
                                     
                                 </select>
@@ -69,8 +70,16 @@ export default NewNoteModal
 const StyledModal = styled.form`
     width: 500px;
     min-height: 200px;
-    padding: 20px;
-    
+    padding: 20px;    
+
+    .fas {
+        position: absolute;
+        padding: 10px;
+        top:10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
     .title {
         font-size: 1.3rem;
         text-align: center;
@@ -173,7 +182,8 @@ const StyledModal = styled.form`
         &:hover {
             filter: brightness(90%);
         }
-        margin: 30px auto;
+        margin: 30px auto 0px auto;
+        
         display: block;
     }
 

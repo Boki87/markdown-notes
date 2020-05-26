@@ -14,6 +14,7 @@ const NoteBtn = ({title, id}) => {
 
     return (
         <StyledNoteBtn onClick={() => setActiveNoteHandler(id)} id={id} activeNote={activeNote.id}>
+            
             <Markdown children={title}/>
         </StyledNoteBtn>
     )
@@ -23,12 +24,13 @@ export default NoteBtn
 
 
 const StyledNoteBtn = styled.div`
-
-    height:100px;
+    position: relative;
+    height:110px;
     overflow: hidden;
     width:100%;
     padding-left:20px;
-    /* border-bottom: 1px solid var(--bg); */
+    border-bottom: 1px solid #ccc;
+    
     background: ${({activeNote, id}) => activeNote === id ? 'var(--bg)' : 'var(--body-bg)'};
     color: ${({activeNote, id}) => activeNote === id ? '#fff' : '#333'};
     &:hover {

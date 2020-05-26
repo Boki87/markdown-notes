@@ -23,7 +23,7 @@ export default createGlobalStyle`
     }
 
     body {
-        font-family: 'Helvetica', 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", '!default';
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
         margin: 0;
         width: 100%;
         height: 100vh;

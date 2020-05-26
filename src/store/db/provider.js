@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import dbReducer from './reducer'
 import {useFirebase} from '../../utils/firebase'
-import {useAuth, useModal} from '../index'
+import {useAuth} from '../index'
+import {useToasts} from '../toasts/provider'
 
 import {
     SET_ACTIVE_CATEGORY,
@@ -33,6 +34,8 @@ const DBProvider = ({children}) => {
         notes:[]
     }
     
+    const {setToast} = useToasts()
+
     const {user} = useAuth()    
     
     const {firebaseApp} = useFirebase()
@@ -85,8 +88,7 @@ const DBProvider = ({children}) => {
             timestamp: +new Date() + '',
             userId: user.uid
         })
-        .then(() => {
-            console.log("Document successfully written!");
+        .then(() => {                    
             dispatch({
                 type: SET_NOTE,
                 payload: {
@@ -99,7 +101,7 @@ const DBProvider = ({children}) => {
             })
         })
         .catch((error) => {
-            
+            setToast('Error saving / editing note', 'danger')
             console.error("Error writing document: ", error);
         });
     }
@@ -115,9 +117,12 @@ const DBProvider = ({children}) => {
 
             dispatch({type:DEL_NOTE, payload:id})
             updateCategories()
+
+            setToast('Note deleted', 'confirm')
         })
         .catch(() => {
             console.log('error deeting')
+            setToast('Error deleting note', 'alert')
         })
     }
 
@@ -137,7 +142,7 @@ const DBProvider = ({children}) => {
                  
             dispatch({type:ADD_NOTE, payload: {...newNote, id:docRef.id}})
             dispatch({type:NOTES_LOADING, payload:false})
-            
+            setToast('Successfuly added note', 'confirm')
             
             cb()
         })

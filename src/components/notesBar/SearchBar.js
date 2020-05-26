@@ -19,7 +19,7 @@ const StyledSearc = styled.div`
     height: 100px;
     display: flex;
     align-items: center;
-
+    border-bottom: 1px solid #ccc;
     .searchWrapper {
         width: 100%;
         height: 45px;

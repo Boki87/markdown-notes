@@ -35,7 +35,7 @@ export default ConfirmModal
 
 const StyledModal = styled.div`
     width: 100%;
-    height: 200px;
+    height: 150px;
     padding: 20px;
     p  {
         text-align: center;

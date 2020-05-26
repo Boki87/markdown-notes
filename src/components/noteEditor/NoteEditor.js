@@ -63,10 +63,15 @@ const StyledEditorWrapper = styled.div`
     pointer-events: ${({activeNote}) => activeNote.id != -1 ? 'auto':'none'};
     background: #fff;
 `
-const StyledTextarea = styled.textarea`    
+const StyledTextarea = styled.textarea`       
     height:100%;
     border: none;
     flex:1;
     overflow: auto;
     padding: 20px;
+    background: var(--bg);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    resize: none;
 `
