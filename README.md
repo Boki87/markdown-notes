@@ -9,4 +9,13 @@ To try locally:
 2. copy paste from .env.example and fill with your firebase secrets
 3. `npm install`
 4. `npm start`
-   
+
+
+###Sign in screen
+![Sign in screen](preview/signin.png)
+
+
+###Dashboard
+![Dashboard](preview/dashboard.png)
+
+

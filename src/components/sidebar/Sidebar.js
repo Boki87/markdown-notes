@@ -26,11 +26,11 @@ const Sidebar = () => {
                 
                 <div className='categoiesContainer'>   
 
-                                {!loading && categories.length == 0 && 
-                                    <div className='no-notes-info'>No categories yet,<br /> go ahead and <a onClick={openNewNoteNodal}>create one.</a></div>
-                                }
+                    {!loading && categories.length == 0 && 
+                        <div className='no-notes-info'>No categories yet,<br /> go ahead and <a onClick={openNewNoteNodal}>create one.</a></div>
+                    }
 
-                                {!loading ? categories.map((category, i) => <CategoryBtn title={category} activeCategory={activeCategory} id={i} key={i} setActiveCategory={setActiveCategory}/>) : <div className='loader-container'><i className="fas fa-circle-notch fa-spin"></i></div>}                      
+                    {!loading ? categories.map((category, i) => <CategoryBtn title={category} activeCategory={activeCategory} id={i} key={i} setActiveCategory={setActiveCategory}/>) : <div className='loader-container'><i className="fas fa-circle-notch fa-spin"></i></div>}                      
 
                 </div>
 
